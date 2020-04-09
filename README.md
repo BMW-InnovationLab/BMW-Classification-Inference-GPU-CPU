@@ -1,37 +1,15 @@
-# Inference API Template
+# Gluoncv classification CPU Inference API For
 
-The Inference API Template section helps you integrate your code inside a predefined inference template.
+This is a repository for an image classification inference API using the Gluoncv framework.
 
-*PLEASE REMOVE THIS SECTION AFTER COMPLETING THE FOLLOWING GUIDELINES:*
+The inference REST API works on CPU. It's supported on Windows and Linux Operating systems.
 
-* In the docker directory, you can find templates for both dockerfile and requirements.txt files
-* In the models directory, you can find a template model
-* This API template can help you integrate multiple implementations for a similar computer vision framework, or multiple frameworks. All you need to do is the following:
-  * Install all dependencies in your docker image
-  * create a python file/files similar to framework_type.py template file under src/main/inference. You can find all guidelines in the template file to insert your code
-  * In the config.json file inside the model file, the inference_engine_name field should have as value the name of the created file
-  * The ConfigurationSchema.json file under src/main/inference, should have the same fields as the config.json file. Any added field in the config.json file should also be added in the ConfigurationSchema.json file
-* Complete the below sections by replacing the words inside the curly brackets by the necessary words. Replace the needed GIFs by a GIF like the one found in docs directory
-* predict image endpoint should not be taken into consideration when using Image Classification
-
-
-
-# {Framework} {CPU|GPU} Inference API For {Windows|Linux}
-
-This is a repository for an {object detection|image classification|image segmentation} inference API using the {Framework} framework.
-
-This repo is based on {repo_link}
-
-The {Framework} version used is {version}. The inference REST API works on {CPU|GPU}. It's supported on {Windows|Linux} Operating systems.
-
-Models trained using our training {framework} repository can be deployed in this API. Several object detection models can be loaded and used at the same time.
-
-**swagger detection|classification|segmentation workflow needed as GIF**
+Models trained using our Gluoncv Classification training  repository can be deployed in this API. Several models can be loaded and used at the same time.
 
 ## Prerequisites
 
 - OS:
-  - {OS}
+  - Windows or Linux
 - Docker
 
 ### Check for prerequisites
@@ -44,7 +22,7 @@ docker --version
 
 ### Install prerequisites
 
-#### {Ubuntu}
+#### -Ubuntu
 
 Use the following command to install docker on Ubuntu:
 
@@ -52,7 +30,7 @@ Use the following command to install docker on Ubuntu:
 chmod +x install_prerequisites.sh && source install_prerequisites.sh
 ```
 
-#### {Windows 10}
+#### -Windows 10
 
 To [install Docker on Windows](https://docs.docker.com/docker-for-windows/install/), please follow the link.
 
@@ -63,32 +41,30 @@ To [install Docker on Windows](https://docs.docker.com/docker-for-windows/instal
 In order to build the project run the following command from the project's root directory:    
 
 ```sh
-sudo docker build -t {tag_name} -f docker/dockerfile .
+docker build -t  gluoncv_classification -f docker/dockerfile .
 ```
 
 ### Behind a proxy
 
 ```sh
-sudo docker build --build-arg http_proxy='' --build-arg https_proxy='' -t {tag_name} -f ./docker/dockerfile .
+docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_classification -f ./docker/dockerfile .
 ```
 
 ## Run the docker container
 
 To run the API, go the to the API's directory and run the following:
 
-#### {Using Linux based docker:}
+#### -Using Linux based docker:
 
 ```sh
-sudo docker run -itv $(pwd)/models:/models -v $(pwd)/src/main:/main -p <docker_host_port>:4343 tensorflow_inference_api_cpu
+sudo docker run -itv $(pwd)/models:/models -v $(pwd)/src/main:/main -p 4343:4343 gluoncv_classification
 ```
 
-#### {Using Windows based docker:}
+#### -Using Windows based docker:
 
 ```sh
-docker run -itv ${PWD}/models:/models -v ${pwd}/src/main:/main -p <docker_host_port>:<internal_port> {tag_name}
+docker run -itv ${PWD}/models:/models -v ${pwd}/src/main:/main -p 4343:4343 gluoncv_classification
 ```
-
-The <docker_host_port>  can be any unique port of your choice.
 
 The API file will be run automatically, and the service will listen to http requests on the chosen port.
 
@@ -97,7 +73,7 @@ The API file will be run automatically, and the service will listen to http requ
 To see all available endpoints, open your favorite browser and navigate to:
 
 ```
-http://<machine_IP>:<docker_host_port>/docs
+http://localhost:4343/docs
 ```
 The 'predict_batch' endpoint is not shown on swagger. The list of files input is not yet supported.
 
@@ -111,7 +87,7 @@ Loads all available models and returns every model with it's hashed value. Loade
 
 #### /detect (POST)
 
-Performs inference on specified model, image, and returns bounding-boxes
+Performs inference on specified model, image, and returns class
 
 #### /get_labels (POST)
 
@@ -127,11 +103,7 @@ Loads the specified model. Loaded models are stored and aren't loaded again
 
 #### /models/{model_name}/predict (POST)
 
-Performs inference on specified model, image, and returns bounding boxes.
-
-#### /models/{model_name}/predict_image (POST)
-
-Performs inference on specified model, image, draws bounding boxes on the image, and returns the actual image as response
+Performs inference on specified model, image, and returns class
 
 #### /models/{model_name}/labels (GET)
 
@@ -141,11 +113,7 @@ Returns all of the specified model labels
 
 Returns the specified model's configuration
 
-#### /models/{model_name}/predict_batch (POST)
 
-Performs inference on specified model and a list of images, and returns bounding boxes
-
-![swagger_endpoints](./docs/swagger_endpoints.png)
 
 ## Usage
 
@@ -155,54 +123,50 @@ Once you have finished training, you need to add the model to the models directo
 
 This process loads the model
 
-**swagger detection|classification|segmentation load endpoint process needed as GIF**
-
 ### Get labels
 
 This process shows the model's labels
 
-**swagger detection|classification|segmentation get labels endpoint process needed as GIF**
-
 ### Detect
 
-This process returns bounding boxes of the specified model
+This process returns class of the specified model
 
-**swagger detection|classification|segmentation detect endpoint process needed as GIF**
+### Predict 
 
-### Predict image
-
-This process shows the predicted image
-
-**swagger detection|classification|segmentation predict image endpoint process needed as GIF**
+This process returns the class of the specified model
 
 ## Model structure
 
 The folder "models" contains subfolders of all the models to be loaded.
 Inside each subfolder there should be a:
 
-- weights file: contains the model weights
+- classes.txt file: contains the name of the classes separated by a ','
 
-- labels file: contains model classes
+- .params file : contain the models parameters
 
-- {any additional required file: what it contains}
+- -0000.params file : contains the models parameters
+
+- -symbol.json file : contains the models architecture
 
 - Config.json (This is a json file containing information about the model)
 
   ```json
-    {
-        "inference_engine_name": "tensorflow_detection",
-        "confidence": <between_0_and_100>,
-        "predictions": <positive_number>,
-        "framework": "{framework}",
-        "type": "{type}",
-        "network": "{network}",
-        "{additional_required_fields}": "{if_exists}"
-    }
+  { 
+  "configuration": 
+     {
+         "gpu": false,
+         "cpu": true, 
+         "max_number_of_predictions": 3, 
+         "minimum_confidence": 0.8
+     },
+   "inference_engine_name":"classification" 
+  }
+  
   ```
     P.S:
     - You can change confidence and predictions values while running the API
-    - The API will return a response with a confidence higher than the "confidence" value. A high "confidence" can show you only accurate predictions
-    - The "predictions" value specifies the maximum number of bounding boxes in the API response
+    - The API will return a response with a confidence higher than the "minimum_confidence" value. A high "minimum_confidence" can show you only accurate predictions
+    - The "max_number_of_predictions" value specifies the maximum number of classes returned and analyzed  in the API response
   
 
 ## Benchmarking
