@@ -3,7 +3,6 @@ FROM python:3.6
 
 
 
-COPY src/packages/gluoncv /usr/local/lib/python3.6/dist-packages/gluoncv 
 RUN pip install  Pillow \
   		  pytest \
   		# fastapi dependencies
@@ -14,6 +13,7 @@ RUN pip install  Pillow \
 		  opencv-python
 RUN pip install jsonschema
 RUN pip install mxnet
+COPY src/packages/gluoncv /usr/local/lib/python3.6/site-packages/gluoncv 
 
 WORKDIR /main
     

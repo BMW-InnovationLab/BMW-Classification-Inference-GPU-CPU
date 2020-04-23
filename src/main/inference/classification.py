@@ -153,6 +153,7 @@ class InferenceEngine(AbstractInferenceEngine):
 		output = []
 
 		image = Image.open(BytesIO(input_data.file.read()))
+		image= image.convert(mode="RGB")
 		model_name = self.model_name
 		pillow_image = image
 
