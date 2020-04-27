@@ -13,9 +13,7 @@ from mxnet import nd
 from gluoncv.data.transforms.presets.imagenet import transform_eval
 import operator
 from collections import OrderedDict
-# added by elie
 import json
-# end of line added by elie
 
 def predict(images, model_name, model_config):
     """ Runs the model to infer on the given image
@@ -49,7 +47,6 @@ def predict(images, model_name, model_config):
     prob = nd.softmax(pred)[0].asnumpy()
     #prob = pred[0].asnumpy()
 
-    # added by elie
     with open(os.path.join("/models",str(model_name),'config.json')) as config_file:
         data = json.load(config_file)
         max_number_of_predictions = data['configuration']['max_number_of_predictions']
@@ -61,23 +58,17 @@ def predict(images, model_name, model_config):
     if(max_number_of_predictions<1):
         max_number_of_predictions=1
 
-    # end of block added by elie    
     
-    #modified line by elie
 
     # find the 5 class indices with the highest score
     ind = nd.topk(pred, k=max_number_of_predictions)[0].astype('int').asnumpy().tolist()
     
-    # end of line modified by elie
 
-    # added by elie
     
     if(minimum_confidence>float(prob[ind[0]])):
         minimum_confidence=float(prob[ind[-1]])
 
-    # end of block added by elie
         
-    #modified block by elie
 
     for i in range(max_number_of_predictions):
 
@@ -85,7 +76,6 @@ def predict(images, model_name, model_config):
             outputs[net.classes[ind[i]]] = float(prob[ind[i]])
             outputs_descending = OrderedDict(sorted(outputs.items(), 
                                   key=lambda kv: kv[1], reverse=True))
-    # end of line modified by elie
                                
     return outputs_descending
 
