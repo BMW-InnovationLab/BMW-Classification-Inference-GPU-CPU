@@ -164,9 +164,11 @@ Inside each subfolder there should be a:
   
   ```
     P.S:
+  
     - You can change confidence and predictions values while running the API
     - The API will return a response with a confidence higher than the "minimum_confidence" value. A high "minimum_confidence" can show you only accurate predictions
     - The "max_number_of_predictions" value specifies the maximum number of classes returned and analyzed  in the API response
+    - Make sure to keep "cpu" true and "gpu" false
   
 
 ## Benchmarking
