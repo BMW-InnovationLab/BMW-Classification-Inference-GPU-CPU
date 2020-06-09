@@ -41,13 +41,13 @@ To [install Docker on Windows](https://docs.docker.com/docker-for-windows/instal
 In order to build the project run the following command from the project's root directory:    
 
 ```sh
-docker build -t  gluoncv_classification -f docker/dockerfile .
+docker build -t  gluoncv_classification -f {CPU or GPU}/dockerfile .
 ```
 
 ### Behind a proxy
 
 ```sh
-docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_classification -f ./docker/dockerfile .
+docker build --build-arg http_proxy='' --build-arg https_proxy='' -t gluoncv_classification -f ./{CPU or GPU}/dockerfile .
 ```
 
 ## Run the docker container
@@ -57,14 +57,16 @@ To run the API, go the to the API's directory and run the following:
 #### -Using Linux based docker:
 
 ```sh
-sudo docker run -itv $(pwd)/models:/models -v $(pwd)/src/main:/main -p 4343:4343 gluoncv_classification
+sudo docker run -itv $(pwd)/models:/models -p 4343:4343 gluoncv_classification
 ```
+Make sure to use nvidia-docker instead of docker for gpu versions.
 
 #### -Using Windows based docker:
 
 ```sh
-docker run -itv ${PWD}/models:/models -v ${pwd}/src/main:/main -p 4343:4343 gluoncv_classification
+docker run -itv ${PWD}/models:/models -p 4343:4343 gluoncv_classification
 ```
+Make sure to use nvidia-docker for gpu versions.
 
 The API file will be run automatically, and the service will listen to http requests on the chosen port.
 
@@ -168,7 +170,7 @@ Inside each subfolder there should be a:
     - You can change confidence and predictions values while running the API
     - The API will return a response with a confidence higher than the "minimum_confidence" value. A high "minimum_confidence" can show you only accurate predictions
     - The "max_number_of_predictions" value specifies the maximum number of classes returned and analyzed  in the API response
-    - Make sure to keep "cpu" true and "gpu" false
+    - Make sure to change cpu and gpu to perform prediction on the device you need 
   
 
 ## Benchmarking
