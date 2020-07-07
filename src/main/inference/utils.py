@@ -35,9 +35,6 @@ def get_models_info(model_config):
             del model_config.models_hash[key]
             del model_config.labels_hash[key]
     
-    print('------------------utils.py---------------')
-    print(model_config.models_hash)
-    print('------------------utils.py---------------')
     return model_config.models_hash
 
 ##block edited by roy
@@ -49,14 +46,12 @@ def load_model(model_config, model_name):
     with open(file_path+'/config.json') as f:
         data= json.load(f)
     config = data["configuration"] 
-    print(config)
     if(config["cpu"] == True): 
         ctx = [mx.cpu()]
         model_config.models_config[model_name] = 'cpu'
     else:
         ctx = [mx.gpu(int(0))]
         model_config.models_config[model_name] = 'gpu'
-    print(ctx)
     net = gluon.nn.SymbolBlock.imports(file_path+"/"+model_name+"-symbol.json", ['data'], file_path+"/"+model_name+"-0000.params", ctx=ctx)
     net.classes = classes
     hash_key=str(uuid.uuid4())
@@ -66,9 +61,6 @@ def load_model(model_config, model_name):
         hash_key=str(uuid.uuid4())
         class_dict[class_name] = hash_key
         model_config.labels_hash[model_name] = class_dict
-    print('------------------net---------------')
-    print(net)
-    print('------------------net---------------')
     return net
 
 

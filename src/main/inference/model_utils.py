@@ -27,10 +27,6 @@ def predict(images, model_name, model_config):
     """
 
     outputs = {}
-    print('----------------------------------------')
-    print(model_config)
-    print(model_config.loaded_models)
-    print('----------------------------------------')
 
     net = model_config.loaded_models[model_name]
 
@@ -42,7 +38,6 @@ def predict(images, model_name, model_config):
         transformed_img = transformed_img.copyto(mx.gpu(0))
     # run forward pass to obtain the predicted score for each class
     pred = net(transformed_img)
-    print(pred[0])
     # map predicted values to probability by softmax
     prob = nd.softmax(pred)[0].asnumpy()
     #prob = pred[0].asnumpy()

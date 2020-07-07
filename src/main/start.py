@@ -168,3 +168,5 @@ async def list_model_config(model_name: str):
 	"""
 	config = dl_service.get_config(model_name)
 	return ApiResponse(data=config)
+
+load_custom()
