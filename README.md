@@ -56,18 +56,31 @@ To run the API, go the to the API's directory and run the following:
 
 #### -Using Linux based docker:
 
+- CPU:
+
 ```sh
 sudo docker run -itv $(pwd)/models:/models -p 4343:4343 gluoncv_classification
 ```
-Make sure to use nvidia-docker instead of docker for gpu versions.
+- GPU:
+
+```sh
+sudo nvidia-docker run -itv $(pwd)/models:/models -p 4343:4343 gluoncv_classification
+```
+
+
 
 #### -Using Windows based docker:
+
+- CPU:
 
 ```sh
 docker run -itv ${PWD}/models:/models -p 4343:4343 gluoncv_classification
 ```
-Make sure to use nvidia-docker for gpu versions.
+- GPU:
 
+```sh
+docker nvidia-docker run -itv ${PWD}/models:/models -p 4343:4343 gluoncv_classification
+```
 The API file will be run automatically, and the service will listen to http requests on the chosen port.
 
 ## API Endpoints
