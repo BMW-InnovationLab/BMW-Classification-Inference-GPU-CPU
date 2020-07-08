@@ -1,10 +1,12 @@
-# Gluoncv classification CPU Inference API For
+# Gluoncv classification GPU/CPU Inference API 
 
 This is a repository for an image classification inference API using the Gluoncv framework.
 
 The inference REST API works on CPU. It's supported on Windows and Linux Operating systems.
 
 Models trained using our Gluoncv Classification training  repository can be deployed in this API. Several models can be loaded and used at the same time.
+
+![api](./docs/api.gif)
 
 ## Prerequisites
 
@@ -128,8 +130,6 @@ Returns all of the specified model labels
 
 Returns the specified model's configuration
 
-
-
 ## Usage
 
 Once you have finished training, you need to add the model to the models directory, and then use the following endpoints:
@@ -186,72 +186,8 @@ Inside each subfolder there should be a:
     - Make sure to change cpu and gpu to perform prediction on the device you need 
   
 
-## Benchmarking
 
-**example benchmark table**
 
-<table>
-    <thead align="center">
-        <tr>
-            <th></th>
-            <th>{OS}</th>
-            <th colspan=3>{OS}</th>
-        </tr>
-    </thead>
-    <thead align="center">
-        <tr>
-            <th>Network\Hardware</th>
-            <th>{hardware}</th>
-            <th>{hardware}</th>
-            <th>{hardware}</th>
-            <th>{hardware}</th>
-        </tr>
-    </thead>
-    <tbody align="center">
-        <tr>
-            <td>{network}</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-        </tr>
-        <tr>
-            <td>{network}</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-        </tr>
-        <tr>
-            <td>{network}</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-        </tr>
-        <tr>
-            <td>{network}</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-        </tr>
-        <tr>
-            <td>{network}</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-        </tr>
-        <tr>
-            <td>{network}</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-            <td>0.000 seconds/image</td>
-        </tr>
-    </tbody>
-</table>
 
 ## Acknowledgements
 
