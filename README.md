@@ -1,10 +1,12 @@
 # Gluoncv classification GPU/CPU Inference API 
 
-This is a repository for an image classification inference API using the Gluoncv framework.
+This is a repository for an image classification inference API using the [Gluoncv](https://gluon-cv.mxnet.io/build/examples_classification/index.html) framework.
 
 The inference REST API works on CPU. It's supported on Windows and Linux Operating systems.
 
 Models trained using our Gluoncv Classification training  repository can be deployed in this API. Several models can be loaded and used at the same time.
+
+
 
 ![api](./docs/api.gif)
 
