@@ -18,7 +18,7 @@ error_logging = Error()
 app = FastAPI(version='1.0', title='BMW InnovationLab CPU Gluoncv Classification Inference Automation',
 			  description="<b>API for performing Classification inference</b></br></br>"
 						  "<b>Contact the developers:</b></br>"
-						  "<b>Developer: <a href='mailto:developer@bmw.de'>developer@bmw.de</a></b></br>"
+						  "<b>Developer: <a href='mailto:roy.aa.anwar@bmw.de'>Roy.aa.anwar@bmw.de</a></b></br>"
 						  "<b>BMW Innovation Lab: <a href='mailto:innovation-lab@bmw.de'>innovation-lab@bmw.de</a></b>")
 
 
