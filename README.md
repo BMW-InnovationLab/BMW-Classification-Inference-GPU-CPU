@@ -132,26 +132,6 @@ Returns all of the specified model labels
 
 Returns the specified model's configuration
 
-## Usage
-
-Once you have finished training, you need to add the model to the models directory, and then use the following endpoints:
-
-### Load
-
-This process loads the model
-
-### Get labels
-
-This process shows the model's labels
-
-### Detect
-
-This process returns class of the specified model
-
-### Predict 
-
-This process returns the class of the specified model
-
 ## Model structure
 
 The folder "models" contains subfolders of all the models to be loaded.
