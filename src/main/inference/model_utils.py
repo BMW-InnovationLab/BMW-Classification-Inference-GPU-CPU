@@ -44,8 +44,8 @@ def predict(images, model_name, model_config):
 
     with open(os.path.join("/models",str(model_name),'config.json')) as config_file:
         data = json.load(config_file)
-        max_number_of_predictions = data['configuration']['max_number_of_predictions']
-        minimum_confidence = data['configuration']['minimum_confidence']
+        max_number_of_predictions = data['max_number_of_predictions']
+        minimum_confidence = data['minimum_confidence']
 
     if(max_number_of_predictions>len(net.classes)):
         max_number_of_predictions=len(net.classes)
